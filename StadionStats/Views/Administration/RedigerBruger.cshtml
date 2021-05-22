@@ -1,0 +1,103 @@
+﻿@model StadionStats.ViewModels.RedigerBrugerViewModel
+
+@{
+    ViewData["Title"] = "Admin - Rediger bruger";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Rediger bruger</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><a href="/Administration/Brugere">Brugere</a><i class="fa fa-angle-double-right"></i><span>Rediger Bruger</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post">
+                @*<div class="form-group">
+                        <label asp-for="Id" class="control-label"></label>
+                        <input asp-for="Id" class="form-control" disabled />
+                    </div>*@
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label">Brugernavn</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label">Telefon</label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Opdater</button>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Roller tilknyttet brugeren:
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @if (Model.Roles.Any())
+                    {
+
+                        @foreach (var role in Model.Roles)
+                        {
+                            <tr>
+                                <td>
+                                    @role
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                Ingen brugere
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+
+            <a asp-action="AdminBrugerRoller" asp-route-userId="@Model.Id">Rediger roller</a>
+
+        </div>
+    </div>
+</div>

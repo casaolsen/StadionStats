@@ -1,0 +1,14 @@
+﻿@model IEnumerable<StadionStats.ViewModels.StatViewModels.SeasonticketsCount>
+
+<div class="statlist">
+    @foreach (var item in Model)
+    {
+        <div class="statlist">
+            <div class="statlistCellLogo">
+                <img class="img-responsive-frontpage-logo" src="~/images/logo/@Html.DisplayFor(modelItem => item.TeamImage)" alt="@Html.DisplayFor(modelItem => item.TeamName)">
+            </div>
+            <div class="statlistCell"><a href="/Team2/Details/@Html.DisplayFor(modelItem => item.Team)">@item.TeamName</a></div>
+            <div class="statlistCell">@item.SeasonticketsSales solgte</div>
+        </div>
+    }
+</div>

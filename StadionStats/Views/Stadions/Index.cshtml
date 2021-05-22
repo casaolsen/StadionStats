@@ -1,0 +1,67 @@
+﻿@model IEnumerable<StadionStats.Models.Stadion>
+
+@{
+    ViewData["Title"] = "Admin - Stadions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Stadions</h1>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create"><b>Opret nyt stadion</b></a>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><a href="/Stadions">Stadions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Stadion
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.StadionID">@Html.DisplayFor(modelItem => item.Navn)</a>
+</td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.StadionID">Slet</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table><br /><br />
+        </div>
+    </div>
+</div>

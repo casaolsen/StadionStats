@@ -1,0 +1,78 @@
+﻿@model IEnumerable<StadionStats.Models.Article>
+
+@{
+    ViewData["Title"] = "Admin - Artikler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Artikler</h1>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create"><b>Opret ny artikel</b></a>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><span>Artikler</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Dato
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Teasertekst
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ArticleID">@Html.DisplayFor(modelItem => item.Title)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TeaserText)
+                            </td>
+
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.ArticleID">Slet</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br /><br />
+        </div>
+    </div>
+</div>

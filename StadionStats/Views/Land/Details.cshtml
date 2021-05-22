@@ -1,0 +1,41 @@
+﻿@model StadionStats.Models.Land
+
+@{
+    ViewData["Title"] = "Admin - Land detaljer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>@Html.DisplayFor(model => model.Landenavn)</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Ligaer i @Html.DisplayFor(model => model.Landenavn)</h4>
+            <hr />
+            @foreach (var item in Model.Liga)
+            {
+
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayFor(modelitem => item.Navn)
+                    </dt>
+                </dl>
+            }
+        </div>
+
+
+
+        <div class="col-md-12">
+            <a asp-action="Edit" asp-route-id="@Model.LandID">Rediger</a> |
+            <a asp-action="Index">Tilbage til oversigt</a>
+        </div>
+    </div>
+</div>

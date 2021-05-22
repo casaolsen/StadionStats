@@ -1,0 +1,58 @@
+﻿@model StadionStats.Models.Stadion
+
+@{
+    ViewData["Title"] = "Admin - Opret stadion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Opret stadion</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><a href="/Stadions">Stadions</a><i class="fa fa-angle-double-right"></i><span>Opret stadion</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Navn" class="control-label"></label>
+                    <input asp-for="Navn" class="form-control" />
+                    <span asp-validation-for="Navn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AttendanceCapacity" class="control-label">Tilskuerkapacitet</label>
+                    <input asp-for="AttendanceCapacity" class="form-control" />
+                    <span asp-validation-for="AttendanceCapacity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Opret" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Tilbage til oversigten</a><br /><br />
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

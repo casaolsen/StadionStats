@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StadionStats.Models.Article>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        @if (Model.Count() != 0)
+        {
+
+            @foreach (var item in Model)
+            {
+                <div class="article">
+
+                    @if (item.Image == null)
+                    {
+                        <img class="article-image" src="images/tilskuere.jpg" alt="@Html.DisplayFor(modelItem => item.Title)">
+                    }
+                    else
+                    {
+                        <img class="article-image" src="images/@Html.DisplayFor(modelItem => item.Image)" alt="@Html.DisplayFor(modelItem => item.Title)">
+                    }
+
+                    <div class="article-body">
+                        <h4 class="article-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                        <small>@Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy")</small>
+                        <p>@Html.DisplayFor(modelItem => item.TeaserText)</p>
+
+                        @if (item.ExternalLink == null)
+                        {
+                            <a class="" href="/Articles/Article/@Html.DisplayFor(modelItem => item.ArticleID)">Læs mere</a>
+                        }
+                        else
+                        {
+                            <a class="" href="@Html.DisplayFor(modelItem => item.ExternalLink)" target="_blank">Læs mere</a>
+                        }
+                    </div>
+                </div>
+            }
+
+        }
+        else
+        {
+
+            <p>Vi har ingen artikler</p>
+
+        }
+
+    </div>
+</div>

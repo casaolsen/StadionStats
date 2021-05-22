@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StadionStats.Models.Team2>
+
+@{
+    ViewData["Title"] = "Klubber";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Header -->
+<header class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Klubber</h1>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create">Opret klub</a>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Klubber</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Team overview -->
+<div class="stadionspec-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                @foreach (var item in Model)
+                {
+                    <div class="stadionspec">
+                        @if (item.Logo != null)
+                        {
+                            <img class="stadionspec-image" src="~/images/logo/@Html.DisplayFor(modelItem => item.Logo)" alt="@Html.DisplayFor(modelItem => item.Name)">
+                        }
+                        else
+                        {
+                            <img class="stadionspec-image" src="~/images/logo/missing.png" alt="Logo mangler">
+                        }
+                        <div class="stadionspec-body">
+                            <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+                            <p>@Html.DisplayFor(modelItem => item.Liga.Navn)<br>@Html.DisplayFor(modelItem => item.Stadion.Navn)</p>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <p>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Slet</a>
+                                </p>
+                            }
+
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

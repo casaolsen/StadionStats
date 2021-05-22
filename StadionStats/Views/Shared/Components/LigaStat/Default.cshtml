@@ -1,0 +1,20 @@
+﻿@model IEnumerable<StadionStats.ViewModels.StatViewModels.LigaGroup>
+
+<div class="ligaliststat-big">
+
+    <div class="ligaliststatRow-big">
+        <div class="ligaliststatCell-big-head">Kampe</div>
+        <div class="ligaliststatCell-big-head">Tilskuere total</div>
+        <div class="ligaliststatCell-big-head">Tilskuere snit</div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="ligaliststatRow-big">
+            <div class="ligaliststatCell-big">@item.LigaCount</div>
+            <div class="ligaliststatCell-big">@item.HomeTotal</div>
+            <div class="ligaliststatCell-big">@item.HomeAvg</div>
+        </div>
+    }
+</div>

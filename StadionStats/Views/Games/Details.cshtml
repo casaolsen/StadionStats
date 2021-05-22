@@ -1,0 +1,83 @@
+﻿@model StadionStats.Models.Game
+
+@{
+    ViewData["Title"] = "Admin - Kampdetaljer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Kampdetajler</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HomeTeam)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HomeTeam.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.AwayTeam)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AwayTeam.Id)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HomeScore)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HomeScore)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.GuestScore)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GuestScore)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Attendance)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Attendance)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Liga)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Liga.Navn)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Stadion)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Stadion.Navn)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IsCorona)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IsCorona)
+                </dd>
+            </dl>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Rediger</a> |
+                <a asp-action="Index">Tilbage til oversigt</a>
+            </div>
+        </div>
+    </div>
+</div>

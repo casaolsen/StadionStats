@@ -1,0 +1,67 @@
+﻿@model StadionStats.Models.Article
+
+@{
+    ViewData["Title"] = "Artikel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>@Html.DisplayFor(model => model.Title)</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><a href="~/Home/OmStadionStats">Artikler</a><i class="fa fa-angle-double-right"></i><span>Artikel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+
+            <small>@Html.DisplayFor(model => model.Date)</small>
+            <p>
+
+                @if (Model.Image == null)
+                {
+                    <img class="article-image" src="~/images/tilskuere.jpg" alt="@Html.DisplayFor(model => model.Title)">
+                }
+                else
+                {
+                    <img class="article-image" src="~/images/@Html.DisplayFor(model => model.Image)" alt="@Html.DisplayFor(model => model.Title)">
+                }
+            </p>
+            <p>
+                @Html.DisplayFor(model => model.Text)
+            </p>
+
+            @if (Model.ReadmoreLink == null)
+            {
+            }
+            else
+            {
+                <a class="" href="@Html.DisplayFor(model => model.ReadmoreLink)" target="_blank">Læs mere</a>
+            }
+
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
+
+<br /><br />

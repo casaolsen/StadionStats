@@ -1,0 +1,43 @@
+﻿@model StadionStats.Models.Liga
+
+@{
+    ViewData["Title"] = "Admin - Liga detaljer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>@Html.DisplayFor(model => model.Navn)</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Liga</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Navn)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Navn)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Land)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Land.Landenavn)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.LigaID">Rediger</a> |
+            <a asp-action="Index">Tilbage til oversigt</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Ikke fundet";
+}
+
+<header id="header" class="ex-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Hov!</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-danger">Der skete desværre en fejl!</h1>
+            <h3>@ViewBag.ErrorMessage</h3><br /><br />
+            <button onclick="goBack()">Gå tilbage</button>
+            <script>
+                function goBack() {
+                    window.history.go(-1);
+                }
+            </script>
+        </div>
+    </div>
+</div>

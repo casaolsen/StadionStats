@@ -1,0 +1,159 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Forside";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Topsection -->
+<header id="header" class="header">
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+
+                            <h1>Tegn det bedste Sponsorat!</h1>
+                            <p class="p-large">StadionStats giver de bedste insights for kommende sponsorer.</p>
+                            <a class="btn-solid-lg-cta page-scroll" href="#request">Tilmeld dig nu</a>
+
+                        }
+                        else
+                        {
+                            <h1>Velkommen til StadionStats!</h1>
+                            <p class="p-large">Gå på opdagelse i enkelte klubber og få de bedste insights til dit kommende sponsorat.</p>
+                            <a class="btn-solid-lg-cta" href="/Team2">Se alle klubber</a>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="image-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Club section frontpage -->
+<div class="clubsection-frontpage">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <center><h2>Få adgang til mange relevante stadionstatistikker</h2></center>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="text-container">
+                    <h4>Tilskuergennemsnit</h4>
+                    <p>Se statistikker på tilskuergennemsnit på alle klubber.</p>
+                    @await Component.InvokeAsync("Stat")
+                </div>
+            </div>
+            <div class="col-lg-2">
+            </div>
+            <div class="col-lg-5">
+                <div class="text-container">
+                    <h4>Sæsonkortsalg</h4>
+                    <p>Se en oversigt over hvormange sæsonkort hver klub har solgt.</p>
+                    @await Component.InvokeAsync("Seasontickets")
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <center>
+                    <br /><br />
+                    <a class="btn-solid-lg2" href="/Home/Hjemmebanestatistik">Se alle statistikker</a>
+                    <br><br>
+                </center>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Club carousel -->
+<div class="slider-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Klubber</h2>
+
+                @await Component.InvokeAsync("Team")
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Services -->
+<div id="services" class="cards-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Sponsorater – en del af marketingplanen</h2>
+                <p class="p-heading p-large">
+                    Sponsorater – eller partnerskaber som det nok mere retteligt hedder i dag – er en marketingdisciplin,
+                    som kan måles på linje med alle andre former for markedsføring.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <img class="card-image" src="~/images/sponsor-icon-1.png" alt="Hospitality og netværk">
+                    <div class="card-body">
+                        <h4 class="card-title">Hospitality og netværk</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus quis sem lacinia nonummy. Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-image" src="~/images/sponsor-icon-2.png" alt="Eksponering">
+                    <div class="card-body">
+                        <h4 class="card-title">Eksponering</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus quis sem lacinia nonummy. Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-image" src="~/images/sponsor-icon-3.png" alt="Sponsorplan">
+                    <div class="card-body">
+                        <h4 class="card-title">Sponsorplan</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus quis sem lacinia nonummy. Lorem ipsum dolor sit amet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter form -->
+<partial name="_Newsletterform" />
+
+<!-- Articles -->
+<div id="article" class="article-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Seneste artikler</h2>
+            </div>
+        </div>
+        @await Component.InvokeAsync("Articles")
+    </div>
+</div>
+
+@if (!SignInManager.IsSignedIn(User))
+{
+
+<partial name="_Contactform" />
+
+}

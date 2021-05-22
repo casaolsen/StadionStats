@@ -1,0 +1,332 @@
+﻿@model StadionStats.Models.Team2
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Klub detaljer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Header with image -->
+
+@if (Model.Image != null)
+{
+    <style>
+    .stadion-header {
+        background-image: url(/images/stadion/@Html.DisplayFor(model => model.Image));
+        background-size: cover;
+        text-align: left;
+    }
+    </style>
+}
+else
+{
+    <style>
+        .stadion-header {
+            background-image: url(/images/stadion/missing.jpg);
+            background-size: cover;
+            text-align: left;
+        }
+    </style>
+}
+
+<header class="stadion-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="stadion-sub-header">@Html.DisplayFor(model => model.Stadion.Navn)</p>
+                <h1>@Html.DisplayFor(model => model.Name)</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><a href="/Team2">Klubber</a><i class="fa fa-angle-double-right"></i><span>@Html.DisplayFor(model => model.Name)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Team info -->
+<div class="stadionspec-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- Team basic info -->
+                <div class="stadionspec">
+                    @if (Model.Logo != null)
+                    {
+                        <img class="stadionspec-image" src="~/images/logo/@Html.DisplayFor(model => model.Logo)" alt="@Html.DisplayFor(model => model.Name)">
+                    }
+                    else
+                    {
+                        <img class="stadionspec-image" src="~/images/logo/missing.png" alt="Logo mangler">
+                    }
+                    <div class="stadionspec-body">
+                        <h4 class="stadionspec-title">@Html.DisplayFor(model => model.Name)</h4>
+                        <p>
+                            @Html.DisplayFor(model => model.Liga.Navn)<br />
+                           <a href="@Html.DisplayFor(model => model.Address)" target="_blank">Hjemmeside</a> <br /><br />
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team stadium stat -->
+                <div class="stadionspec">
+                    <img class="stadionspec-image" src="~/images/club-stadium.png" alt="Klub stadion">
+                    <div class="stadionspec-body">
+                        <h4 class="stadionspec-title">Stadion</h4>
+                        Stadionkapacitet: <b>@Html.DisplayFor(model => model.Stadion.AttendanceCapacity)</b><br>
+
+                        @{
+                            var result = ((float)Model.Seasontickets / (float)Model.Stadion.AttendanceCapacity) * 100; // Beregn %-del af kapacitet solgt
+                        }
+
+                        @if (Model.Seasontickets != 0)
+                        {
+                            <p>Sæsonkort: <b>@Html.DisplayFor(model => model.Seasontickets)</b> stk.<br /> (@result.ToString("0") % af kapacitet)</p>
+                        }
+                        else
+                        {
+                            <p>Antal solgte sæsonkort ikke angivet</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Team spectator stat -->
+                <div class="stadionspec">
+                    <img class="stadionspec-image" src="~/images/club-spectators.png" alt="Klub tilskuerstatistik">
+                    <div class="stadionspec-body">
+                        <h4 class="stadionspec-title">Tilskuertal</h4>
+                        @if (Model.HomeGames.Count() != 0)
+                        {
+                            <p>
+                                Samlet antal tilskuere: <b>@Model.HomeGames.Sum(i => i.Attendance)</b><br />
+                                Gennemsnit: <b>@Model.HomeGames.Average(i => i.Attendance).ToString("0")</b><br />
+
+                                @if (Model.HomeGames.Where(x => x.IsCorona == false).Count() != 0)
+                                {
+
+                                    <span> Gennemsnit før Corona: <b>@Model.HomeGames.Where(x => x.IsCorona == false).Average(i => i.Attendance).ToString("0")</b></span>
+                                }
+                            </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Rediger klub</a> |
+                <a asp-action="Index">Tilbage til kluboversigt</a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Game details -->
+<div class="clubsection-subpage">
+    <div class="container">
+        @if (Model.HomeGames.Count() != 0)
+        {
+            <div class="row">
+                <div class="col-lg-5">
+                    <h3>Tilskuersnit på hjemmebane</h3>
+                    @await Component.InvokeAsync("Liga", new { clubID = Model.Id })
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-5">
+                    <div class="text-container">
+                        <h3>Seneste 3 hjemmekampe</h3>
+                        <div class="ligalist-big">
+                            <div class="ligalistRow-big">
+                                <div class="ligalistCell-big-head"><b>Dato</b></div>
+                                <div class="ligalistCell-big-head"><b>Modstander</b></div>
+                                <div class="ligalistCell-big-head"><b>Tilskuertal</b></div>
+                                <div class="ligalistCell-big-head"></div>
+                            </div>
+
+                            @foreach (var item in Model.HomeGames.Take(3).OrderByDescending(o => o.Date))
+                            {
+                                <div class="ligalistRow-big">
+                                    <div class="ligalistCell-big">@Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy")</div>
+                                    <div class="ligalistCell-big">@Html.DisplayFor(modelItem => item.AwayTeam.Name)</div>
+                                    <div class="ligalistCell-big">@Html.DisplayFor(modelItem => item.Attendance)</div>
+                                    @if (item.IsCorona == true)
+                                    {
+                                        <div class="ligalistCell-big"><img width="25" src="~/images/corona-icon-white.png" data-toggle="tooltip" title="Denne kamp havde tilskuerbegrænsning pga. Corona"></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="ligalistCell-big"></div>
+
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>@Html.DisplayFor(model => model.Name) har ingen kampe registreret.</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Sponsor text -->
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <div class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>@Html.DisplayFor(model => model.Name) sponsortilbud</h2>
+                    <p>Her kan du læse om de sponsormuligheder du har i klubben. Hvis det har interesse, så udfyld formularen nedenfor og du vil blive kontaktet.</p>
+                    @if (Model.Sponsortext != null)
+                    {
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="#tab_intro" class="nav-link active" data-toggle="tab">Intro</a>
+                            </li>
+                            @if (Model.Sponsor.Count() != 0)
+                            {
+
+
+                                @foreach (var item in Model.Sponsor)
+                                {
+
+                                    <li class="nav-item">
+                                        <a href="#tab_@Html.DisplayFor(modelItem => item.SponsorID)" class="nav-link" data-toggle="tab">@Html.DisplayFor(modelItem => item.Title)</a>
+                                    </li>
+
+                                }
+
+                            }
+
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane active" style="background-color:#ffffff; padding:20px; border-left: 1px solid #dee2e6;border-right: 1px solid #dee2e6;border-bottom: 1px solid #dee2e6;" id="tab_intro">
+                                <p>@Html.Raw(Model.Sponsortext)</p>
+                            </div>
+
+                            @foreach (var item in Model.Sponsor)
+
+                            {
+
+                                <div class="tab-pane" style="background-color:#ffffff; padding:20px; border-left: 1px solid #dee2e6;border-right: 1px solid #dee2e6;border-bottom: 1px solid #dee2e6;" id="tab_@Html.DisplayFor(modelItem => item.SponsorID)">
+                                    <p>@Html.Raw(item.SponsorText)</p>
+                                </div>
+
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Klubben har ikke tilføjet sponsortekst</p>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+
+    <div class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>@Html.DisplayFor(model => model.Name) sponsortilbud</h1>
+                    <p>Denne sektion kræver <a href="/Identity/Account/Login?returnUrl=/Team2/Details/@Html.DisplayFor(model => model.Id)">login</a>.</p>
+                    <p><a class="btnlogin-solid" href="/Identity/Account/Register?returnUrl=%2F">Tilmeld dig nu</a></p>
+                    <img src="~/images/content.png" width="100%" alt="Denne sektion kræver login">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Contact club form -->
+@if (SignInManager.IsSignedIn(User))
+{
+    <div id="request" class="form-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-8">
+                    <div class="form-container">
+                        <h2>Bliv kontaktet af @Html.DisplayFor(model => model.Name) </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus quis sem lacinia nonummy. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis lectus quis sem lacinia nonummy.</p>
+
+                        <form id="requestForm" data-toggle="validator" data-focus="false">
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="rname" name="rname" required>
+                                <label class="label-control" for="rname">Navn</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control-input" id="remail" name="remail" value="@User.Identity.Name" required>
+                                <label class="label-control" for="remail">Email</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control-input" id="rphone" name="rphone" required>
+                                <label class="label-control" for="rphone">Telefon</label>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control-select" id="rselect" required>
+                                    <option class="select-option" value="" disabled selected>Min profil...</option>
+                                    <option class="select-option" value="Privat">Privat</option>
+                                    <option class="select-option" value="Konsulent">Sponsorkonsulent</option>
+                                    <option class="select-option" value="Virksomhed">Virksomhed</option>
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="rterms" value="Agreed-to-Terms" name="rterms" required>Jeg accepterer <a href="privacy-policy.html">privatlivspolitik</a> og <a href="terms-conditions.html">betingelser</a>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control-submit-button">Bliv kontaktet</button>
+                            </div>
+                            <div class="form-message">
+                                <div id="rmsgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                </div>
+            </div>
+        </div>
+    </div>
+}

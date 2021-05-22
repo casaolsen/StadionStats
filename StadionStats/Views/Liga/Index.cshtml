@@ -1,0 +1,69 @@
+﻿@model IEnumerable<StadionStats.Models.Liga>
+
+@{
+    ViewData["Title"] = "Admin - Ligaer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Ligaer</h1>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create"><b>Opret ny liga</b></a>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><span>Ligaer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Navn)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Land)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.LigaID">@Html.DisplayFor(modelItem => item.Navn)</a>
+</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Land.Landenavn)
+                            </td>
+                            <td>
+                                <a asp-action="Delete" asp-route-id="@item.LigaID">Slet</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

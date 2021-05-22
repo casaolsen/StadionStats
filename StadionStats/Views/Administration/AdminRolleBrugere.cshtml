@@ -1,0 +1,59 @@
+﻿@model List<StadionStats.ViewModels.BrugerRolleViewModel>
+
+@{
+    var roleID = ViewBag.roleID;
+    ViewData["Title"] = "Admin - Tilføj eller fjern brugere til rollen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Tilføj eller fjern brugere til rollen</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><a href="/Administration/Roller">Roller</a><i class="fa fa-angle-double-right"></i><a asp-action="RedigerRolle" asp-route-id="@roleID">Rediger Rolle</a><i class="fa fa-angle-double-right"></i><a href="#">Rediger brugere i rollen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div class="form-group">
+                    <h2></h2>
+                </div>
+                <div class="form-group">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <input type="hidden" asp-for="@Model[i].UserId" />
+                        <input type="hidden" asp-for="@Model[i].UserName" />
+                        <input asp-for="@Model[i].IsSelected" />
+                        <label asp-for="@Model[i].IsSelected">
+                            @Model[i].UserName
+                        </label><br />
+                    }
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Opdater">
+                    <a asp-action="RedigerRolle" asp-route-id="@roleID">Annuller</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

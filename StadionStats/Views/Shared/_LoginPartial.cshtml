@@ -1,0 +1,39 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+        @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej <b>@User.Identity.Name</b></a>*@
+
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Manage/Index">
+            <button type="submit" class="btn btn-outline-secondary btn-sm">Hej <b>@User.Identity.Name</b></button>&nbsp;
+        </form>
+
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="btn btn-outline-secondary btn-sm">Log ud</button>
+        </form>
+    }
+    else
+    {
+
+        <a class="btnlogin-solid" href="/Identity/Account/Register?returnUrl=%2F">Tilmeld dig nu</a>
+
+        @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Register">
+            <button type="submit" class="btnlogin-solid">Opret adgang</button>
+        </form>*@
+
+        @*<li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Opret</a>
+            </li>*@
+
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Login">
+            <button type="submit" class="btn-outline-reg">Log ind</button>
+        </form>
+
+
+        @*<a class="btn btn-primary btn-sm" asp-area="Identity" asp-page="/Account/Login">Log ind</a>*@
+    }
+</ul>

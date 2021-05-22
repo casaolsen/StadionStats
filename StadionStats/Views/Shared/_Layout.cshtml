@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StadionStats</title>
+
+    <environment @*include="Development"*@>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i400i,600,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="~/css/fontawesome-all.css" rel="stylesheet">
+    <link href="~/css/swiper.css" rel="stylesheet">
+    <link href="~/css/styles.css" rel="stylesheet">
+
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+       
+        <!-- Image Logo -->
+        <a class="navbar-brand logo-image" href="/"><img src="~/images/logo.png" alt="SponsorStats"></a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+
+        <!-- Menu -->
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Team2" asp-action="Index">Klubber</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Liga" asp-action="Ligaer">Turneringer</a>
+                </li>
+                <!-- Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Statistik
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Hjemmebanestatistik">Klub tilskuertal</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LigaStatistik">Liga tilskuertal</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="OmStadionStats">Om StadionStats</a>
+                </li>
+
+                <!-- Admin Menu -->
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="Brugere">Brugere</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="Roller">Roller</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Land" asp-action="Index">Lande</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Liga" asp-action="Index">Ligaer</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Stadions" asp-action="Index">Stadions</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Games" asp-action="Index">Kampe</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Sponsors" asp-action="Index">Sponsorindhold</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Articles" asp-action="Index">Artikler</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
+    
+    <!-- Content -->
+
+    @RenderBody()
+
+    <!-- Footer -->
+    <partial name="_Footer" />
+
+    <!-- Scripts -->
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="~/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="~/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="~/js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="~/js/scripts.js"></script> <!-- Custom scripts -->
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

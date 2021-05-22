@@ -1,0 +1,54 @@
+﻿@model StadionStats.Models.Land
+
+@{
+    ViewData["Title"] = "Admin - Rediger land";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Rediger land</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><a href="/Land">Lande</a><i class="fa fa-angle-double-right"></i><span>Rediger @Html.DisplayFor(model => model.Landenavn)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="LandID" />
+                <div class="form-group">
+                    <label asp-for="Landenavn" class="control-label"></label>
+                    <input asp-for="Landenavn" class="form-control" />
+                    <span asp-validation-for="Landenavn" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index">Tilbage til oversigten</a><br /><br />
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<StadionStats.Models.Team2>
+
+<!-- Klub karrusel -->
+<div class="slider-container">
+    <div class="swiper-container image-slider">
+        <div class="swiper-wrapper">
+
+            @foreach (var item in Model)
+            {
+                <div class="swiper-slide">
+                    <div class="image-container">
+                        <a href="/Team2/Details/@Html.DisplayFor(modelItem => item.Id)"><img class="img-responsive" src="~/images/logo/@Html.DisplayFor(modelItem => item.Logo)" alt="@Html.DisplayFor(modelItem => item.Name)"></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

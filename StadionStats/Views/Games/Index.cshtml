@@ -1,0 +1,109 @@
+﻿@model IEnumerable<StadionStats.Models.Game>
+
+@{
+    ViewData["Title"] = "Kampe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="ex-header-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Kampe</h1>
+                @if (User.IsInRole("Admin"))
+                {
+                    <p>
+                        <a asp-action="Create"><b>Opret ny kamp</b></a>
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumbs-admin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text">
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Administration</span><i class="fa fa-angle-double-right"></i><span>Kampe</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-container">
+                <div class="statlist-big-sub">
+
+                    <div class="statlistRow-big-sub">
+                        <div class="statlistCell-big-head-sub">Dato og Stadion</div>
+                        <div class="statlistCell-big-head-sub">Hjemme</div>
+                        <div class="statlistCell-big-head-sub"></div>
+                        <div class="statlistCell-big-head-sub">Ude</div>
+                        <div class="statlistCell-big-head-sub">Tilskuere</div>
+                        <div class="statlistCell-big-head-sub">TV seere</div>
+                        <div class="statlistCell-big-head-sub"></div>
+                    </div>
+
+                    @foreach (var item in Model.OrderByDescending(model => model.Date))
+                    {
+
+                        <div class="statlistRow-big-sub">
+                            <div class="statlistCell-big-sub">@Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy")<br />@Html.DisplayFor(modelItem => item.Stadion.Navn)<br />@Html.DisplayFor(modelItem => item.Liga.Navn)</div>
+                            <div class="statlistCell-big-sub">
+                                <img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.HomeTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.HomeTeam.Name)">&nbsp;
+                                @Html.DisplayFor(modelItem => item.HomeTeam.Name)
+                            </div>
+                            <div class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.HomeScore) - @Html.DisplayFor(modelItem => item.GuestScore)</div>
+                            <div class="statlistCell-big-sub">
+                                <img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.AwayTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.AwayTeam.Name)">&nbsp;
+                                @Html.DisplayFor(modelItem => item.AwayTeam.Name)
+                            </div>
+                            <div class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.Attendance)</div>
+                            <div class="statlistCell-big-sub">
+                                @if (item.Tv == 0)
+                                {
+                                    <text>Ikke opgivet</text>
+                                }
+                                else
+                                {
+
+                                    @Html.DisplayFor(modelItem => item.Tv)
+                                }
+                            </div>
+                            <div class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.IsCorona)</div>
+                            <div class="statlistCell-big-sub">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <p>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Rediger</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Slet</a>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-container">
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</div>
