@@ -173,7 +173,6 @@ a:hover {
     font: 700 1rem/0 "Lato", sans-serif;
 	text-decoration: none;
 	transition: all 0.2s;
-	margin-left: 1rem;
 }
 
 .btn-outline-reg:hover {
@@ -1243,6 +1242,10 @@ input[type='checkbox'] {
 		margin-right: auto;
 		margin-left: auto;
 	}
+	
+	.btn-outline-reg {
+		margin-top: 1rem;
+	}
 
 	/* Header */
 	.header {
@@ -1406,6 +1409,11 @@ input[type='checkbox'] {
 	.p-heading {
 		width: 65%;
 	}
+	
+	.btn-outline-reg {
+		margin-left: 1rem;
+		margin-top: 0rem;
+	}
 
 	/* Topsection */
 	.header {
@@ -1517,6 +1525,11 @@ input[type='checkbox'] {
 	/* General Styles */
 	.p-heading {
 		width: 55%;
+	}
+	
+	.btn-outline-reg {
+		margin-left: 1rem;
+		margin-top: 0rem;
 	}
 
 	/* Header */

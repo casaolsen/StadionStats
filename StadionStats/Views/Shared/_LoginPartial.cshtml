@@ -19,11 +19,16 @@
     else
     {
 
-        <a class="btnlogin-solid" href="/Identity/Account/Register?returnUrl=%2F">Tilmeld dig nu</a>
+        <form class="form-inline" action="/Identity/Account/Register?returnUrl=%2F">
+            <button type="submit" class="btnlogin-solid">Tilmeld dig nu</button>
+        </form>
+
+
+        @*<a class="btnlogin-solid" href="/Identity/Account/Register?returnUrl=%2F">Tilmeld dig nu</a>*@
 
         @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Register">
-            <button type="submit" class="btnlogin-solid">Opret adgang</button>
-        </form>*@
+                <button type="submit" class="btnlogin-solid">Opret adgang</button>
+            </form>*@
 
         @*<li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Opret</a>
