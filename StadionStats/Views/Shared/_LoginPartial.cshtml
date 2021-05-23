@@ -8,12 +8,17 @@
 
         @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hej <b>@User.Identity.Name</b></a>*@
 
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Manage/Index">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">Hej <b>@User.Identity.Name</b></button>&nbsp;
+
+        <form class="form-inline" action="/Identity/Account/Manage?">
+            <button type="submit" class="btn-outline-reg">@User.Identity.Name</button>
         </form>
 
+        @*<form class="form-inline" asp-area="Identity" asp-page="/Account/Manage/Index">
+            <button type="submit" class="btn-outline-reg">Hej <b>@User.Identity.Name</b></button>&nbsp;
+        </form>*@
+
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="btn btn-outline-secondary btn-sm">Log ud</button>
+            <button type="submit" class="btn-outline-reg">Log ud</button>
         </form>
     }
     else
