@@ -34,7 +34,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-container">
-                    <br /><br />
                     <!-- Google Chart - tilskuersnit -->
                     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                     <script type="text/javascript">
@@ -63,7 +62,7 @@
                                 2]);
 
                             var options = {
-                                title: "Tilskuertal i snit for alle ligaer",
+                                //title: "Hjemmebanetilskuertal i snit for alle klubber",
                                 width: "95%",
                                 height: 400,
                                 bar: { groupWidth: "95%" },
@@ -87,15 +86,15 @@
 <br /><br />
 <div class="container">
     <div class="row">
-        <div class="col-lg-1">
+        <div class="col-lg-2">
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-8">
             <div class="text-container">
                 <div class="statlist-big-sub">
 
                     <div class="statlistRow-big-sub">
                         <div class="statlistCell-big-head-sub"></div>
-                        <div class="statlistCell-big-head-sub">Liga</div>
+                        <div class="statlistCell-big-head-sub"></div>
                         <div class="statlistCell-big-head-sub"><b>Kampe</b></div>
                         <div class="statlistCell-big-head-sub"><b>Total</b></div>
                         <div class="statlistCell-big-head-sub"><b>Snit</b></div>
@@ -106,7 +105,7 @@
 
                         <div class="statlistRow-big-sub">
                             <div class="statlistCell-big-sub"><img style="height:50px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.LigaLogo)" alt="@Html.DisplayFor(modelItem => item.LigaName)"></div>
-                            <div class="statlistCell-big-sub"><b>@Html.DisplayFor(modelItem => item.LigaName)</b></div>
+                            <div class="statlistCell-big-sub"><a href="/Liga/Liga/@Html.DisplayFor(modelItem => item.LigaID)"><b>@Html.DisplayFor(modelItem => item.LigaName)</b></a></div>
                             <div class="statlistCell-big-sub">@item.LigaCount</div>
                             <div class="statlistCell-big-sub">@item.HomeTotal</div>
                             <div class="statlistCell-big-sub">@item.HomeAvg</div>
@@ -115,7 +114,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-1">
+        <div class="col-lg-2">
         </div>
     </div>
 </div>

@@ -30,73 +30,72 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text">
-                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Statistik</span><i class="fa fa-angle-double-right"></i><a href="/Liga/Ligaer">Ligaer og pokalturneringer</a><i class="fa fa-angle-double-right"></i><span>@Html.DisplayFor(model => model.Navn)</span>
+                    <a href="/">Forside</a><i class="fa fa-angle-double-right"></i><span>Statistik</span><i class="fa fa-angle-double-right"></i><a href="/Liga/Ligaer">Ligaer og kampe</a><i class="fa fa-angle-double-right"></i><span>@Html.DisplayFor(model => model.Navn)</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@if (Model.Games.Count() != 0)
+{
+    <div class="container">
+        @foreach (var item in Model.Games.OrderByDescending(model => model.Date))
+        {
+            <br /><br />
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="text-container">
+                        <div class="statlist-big-sub">
+                            <div class="statlistRow-big-sub">
+                                <div>
+                                    <b>@Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy"), @Html.DisplayFor(modelItem => item.Stadion.Navn)</b><br />
+                                    Tilskuere: @Html.DisplayFor(modelItem => item.Attendance), @if (item.Tv == 0)
+                                    {
+                                        <text>TV: Ikke opgivet</text>
+                                    }
+                                    else
+                                    {
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="text-container">
-                <br /><br />
-
-                @if (Model.Games.Count() != 0)
-                {
-                    <div class="statlist-big-sub">
-
-                        <div class="statlistRow-big-sub">
-                            <div class="statlistCell-big-head-sub"><b>Dato og Stadion</b></div>
-                            <div class="statlistCell-big-head-sub"><b>Hjemme</b></div>
-                            <div class="statlistCell-big-head-sub"></div>
-                            <div class="statlistCell-big-head-sub"><b>Ude</b></div>
-                            <div class="statlistCell-big-head-sub"><b>Tilskuere</b></div>
-                            <div class="statlistCell-big-head-sub"><b>TV seere</b></div>
-                            <div class="statlistCell-big-head-sub"></div>
+                                        <span>TV: @Html.DisplayFor(modelItem => item.Tv)</span>
+                                    }
+                                    <br /><br />
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        @foreach (var item in Model.Games.OrderByDescending(model => model.Date))
-                        {
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="statlist-big-sub">
+                            <div class="statlistRow-big-sub">
+                                <div style="width:25%;" class="statlistCell-big-sub"><img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.HomeTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.HomeTeam.Name)">&nbsp;&nbsp;<a href="/Team2/Details/@Html.DisplayFor(modelItem => item.HomeTeamId)">@Html.DisplayFor(modelItem => item.HomeTeam.Name)</a></div>
+                                <div style="width:10%;" class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.HomeScore) - @Html.DisplayFor(modelItem => item.GuestScore)</div>
+                                <div style="width:25%;" class="statlistCell-big-sub"><img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.AwayTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.AwayTeam.Name)">&nbsp;&nbsp;<a href="/Team2/Details/@Html.DisplayFor(modelItem => item.AwayTeamId)">@Html.DisplayFor(modelItem => item.AwayTeam.Name)</a></div>
 
-                        <div class="statlistRow-big-sub">
-                            <div class="statlistCell-big-sub">@Convert.ToDateTime(item.Date).ToString("dd/MM/yyyy")<br />@Html.DisplayFor(modelItem => item.Stadion.Navn)</div>
-                            <div class="statlistCell-big-sub"><img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.HomeTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.HomeTeam.Name)">&nbsp;<a href="/Team2/Details/@Html.DisplayFor(modelItem => item.HomeTeamId)">@Html.DisplayFor(modelItem => item.HomeTeam.Name)</a></div>
-                            <div class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.HomeScore) - @Html.DisplayFor(modelItem => item.GuestScore)</div>
-                            <div class="statlistCell-big-sub"><img style="height:30px;" src="~/images/logo/@Html.DisplayFor(modelItem => item.AwayTeam.Logo)" alt="@Html.DisplayFor(modelItem => item.AwayTeam.Name)">&nbsp;<a href="/Team2/Details/@Html.DisplayFor(modelItem => item.AwayTeamId)">@Html.DisplayFor(modelItem => item.AwayTeam.Name)</a></div>
-                            <div class="statlistCell-big-sub">@Html.DisplayFor(modelItem => item.Attendance)</div>
-                            <div class="statlistCell-big-sub">
-                                @if (item.Tv == 0)
+                                @if (item.IsCorona == true)
                                 {
-                                    <text>Ikke opgivet</text>
+                                    <div style="width:5%;" class="statlistCell-big-sub"><img width="25" src="~/images/corona-icon-black.png" data-toggle="tooltip" title="Denne kamp havde tilskuerbegrænsning pga. Corona"></div>
                                 }
                                 else
                                 {
+                                    <div style="width:5%;" class="statlistCell-big-sub"></div>
 
-                                    @Html.DisplayFor(modelItem => item.Tv)
                                 }
                             </div>
-                            @if (item.IsCorona == true)
-                            {
-                                <div class="statlistCell-big-sub"><img width="25" src="~/images/corona-icon-black.png" data-toggle="tooltip" title="Denne kamp havde tilskuerbegrænsning pga. Corona"></div>
-                            }
-                            else
-                            {
-                                <div class="statlistCell-big-sub"></div>
-
-                            }
                         </div>
-                        }
+
                     </div>
-                }
-                else
-                {
-                    <p>Ingen kampe oprettet</p>
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
-</div>
+}
+else
+{
+    <p>Ingen kampe oprettet</p>
+}
 <br /><br />

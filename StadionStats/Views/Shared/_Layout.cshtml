@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StadionStats</title>
 
-    <environment @*include="Development"*@>
+    <environment @*include="Development" *@>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
@@ -21,7 +21,7 @@
 <body data-spy="scroll" data-target=".fixed-top">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-       
+
         <!-- Image Logo -->
         <a class="navbar-brand logo-image" href="/"><img src="~/images/logo.png" alt="SponsorStats"></a>
 
@@ -39,9 +39,6 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Team2" asp-action="Index">Klubber</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Liga" asp-action="Ligaer">Turneringer</a>
-                </li>
                 <!-- Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,6 +47,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Hjemmebanestatistik">Klub tilskuertal</a>
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LigaStatistik">Liga tilskuertal</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Liga" asp-action="Ligaer">Ligaer og kampe</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -80,7 +78,7 @@
             <partial name="_LoginPartial" />
         </div>
     </nav>
-    
+
     <!-- Content -->
 
     @RenderBody()
