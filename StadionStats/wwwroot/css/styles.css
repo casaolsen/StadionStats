@@ -612,7 +612,7 @@ input[type='checkbox'] {
 .ligalistCell-big {
 	display: table-cell;
 	height: 40px;	
-	padding: 3px 10px;
+	padding: 3px 0px;
     text-align: left;
     vertical-align: middle;
     border-bottom: 1px solid #1a6f99;
@@ -621,7 +621,7 @@ input[type='checkbox'] {
 .ligalistCell-big-head {
 	display: table-cell; 
 	height: 40px;	
-	padding: 3px 10px;
+	padding: 3px 0px;
     text-align: left;
     vertical-align: middle;
 }
@@ -815,7 +815,8 @@ input[type='checkbox'] {
 
 .clubsection-subpage h3 {
 	color:#fff;
-	margin-bottom: 3rem;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
 }
 
 .clubsection-subpage h4 {

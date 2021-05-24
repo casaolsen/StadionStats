@@ -76,7 +76,7 @@ else
                         <h4 class="stadionspec-title">@Html.DisplayFor(model => model.Name)</h4>
                         <p>
                             @Html.DisplayFor(model => model.Liga.Navn)<br />
-                           <a href="@Html.DisplayFor(model => model.Address)" target="_blank">Hjemmeside</a> <br /><br />
+                            <a href="@Html.DisplayFor(model => model.Address)" target="_blank">Hjemmeside</a> <br /><br />
                         </p>
                     </div>
                 </div>
@@ -147,6 +147,7 @@ else
                     @await Component.InvokeAsync("Liga", new { clubID = Model.Id })
                 </div>
                 <div class="col-lg-2">
+                    &nbsp;
 
                 </div>
                 <div class="col-lg-5">
@@ -155,8 +156,8 @@ else
                         <div class="ligalist-big">
                             <div class="ligalistRow-big">
                                 <div class="ligalistCell-big-head"><b>Dato</b></div>
-                                <div class="ligalistCell-big-head"><b>Modstander</b></div>
-                                <div class="ligalistCell-big-head"><b>Tilskuertal</b></div>
+                                <div class="ligalistCell-big-head"><b>Mod</b></div>
+                                <div class="ligalistCell-big-head"><b>Tilskuere</b></div>
                                 <div class="ligalistCell-big-head"></div>
                             </div>
 
