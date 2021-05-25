@@ -45,11 +45,11 @@ namespace StadionStats.Data
                 }
             }
 
-            if (userManager.FindByEmailAsync("git@stadionstats.dk").Result == null)
+            if (userManager.FindByEmailAsync("gitte-api@stadionstats.dk").Result == null)
             {
                 IdentityUser user = new IdentityUser();
-                user.UserName = "git@stadionstats.dk";
-                user.Email = "git@stadionstats.dk";
+                user.UserName = "gitte-api@stadionstats.dk";
+                user.Email = "gitte-api@stadionstats.dk";
 
                 IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd1!").Result;
 

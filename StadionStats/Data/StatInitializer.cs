@@ -32,6 +32,7 @@ namespace StadionStats.Data
             var ligaer = new Liga[]
             {
             new Liga{Navn="3F Superligaen",Logo="1.png",LandID=1},
+            new Liga{Navn="Sydbank pokalen",Logo="2.png",LandID=1},
             };
             foreach (Liga d in ligaer)
             {
@@ -70,7 +71,9 @@ namespace StadionStats.Data
             new Game{Date=DateTime.Parse("2021-04-01"),HomeTeamId=1,AwayTeamId=3,HomeScore=1,GuestScore=0,Attendance=27500,StadionID=1,LigaID=1},
             new Game{Date=DateTime.Parse("2021-04-05"),HomeTeamId=2,AwayTeamId=4,HomeScore=1,GuestScore=3,Attendance=6500,StadionID=2,LigaID=1},
             new Game{Date=DateTime.Parse("2021-04-11"),HomeTeamId=3,AwayTeamId=2,HomeScore=1,GuestScore=3,Attendance=7600,StadionID=3,LigaID=1},
-            new Game{Date=DateTime.Parse("2021-04-13"),HomeTeamId=4,AwayTeamId=1,HomeScore=0,GuestScore=5,Attendance=31300,StadionID=4,LigaID=1},
+            new Game{Date=DateTime.Parse("2021-04-13"),HomeTeamId=4,AwayTeamId=1,HomeScore=0,GuestScore=5,Attendance=28300,StadionID=4,LigaID=1},
+            new Game{Date=DateTime.Parse("2021-05-11"),HomeTeamId=3,AwayTeamId=2,HomeScore=1,GuestScore=3,Attendance=7600,StadionID=3,LigaID=2},
+            new Game{Date=DateTime.Parse("2021-05-13"),HomeTeamId=4,AwayTeamId=1,HomeScore=0,GuestScore=5,Attendance=25300,StadionID=4,LigaID=2},
             };
             foreach (Game f in games)
             {
